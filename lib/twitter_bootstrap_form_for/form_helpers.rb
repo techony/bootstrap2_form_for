@@ -1,7 +1,7 @@
 require 'twitter_bootstrap_form_for'
 
 module TwitterBootstrapFormFor::FormHelpers
-  [:form_for, :fields_for, :form_with].each do |method|
+  [:form_for, :fields_for].each do |method|
     module_eval do
       define_method "bootstrap2_#{method}" do |record, *args, &block|
         # add the TwitterBootstrap builder to the options
@@ -13,6 +13,18 @@ module TwitterBootstrapFormFor::FormHelpers
           send method, record, *(args << options), &block
         end
       end
+    end
+  end
+
+  module_eval do
+  define_method "bootstrap2_form_with}" do |*args, &block|
+    # add the TwitterBootstrap builder to the options
+    options           = args.extract_options!
+    options[:builder] = TwitterBootstrapFormFor::FormBuilder
+
+    # call the original method with our overridden options
+    _override_field_error_proc do
+      send :form_with, *(args << options), &block
     end
   end
 
