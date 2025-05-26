@@ -17,7 +17,7 @@ module TwitterBootstrapFormFor::FormHelpers
   end
 
   module_eval do
-  define_method "bootstrap2_form_with}" do |*args, &block|
+  define_method "bootstrap2_form_with" do |*args, &block|
     # add the TwitterBootstrap builder to the options
     options           = args.extract_options!
     options[:builder] = TwitterBootstrapFormFor::FormBuilder
